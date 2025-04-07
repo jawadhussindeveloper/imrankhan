@@ -5,6 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IMRAN KHAN</title>
     <script src="script.js"></script>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.image-container {
+    width: 300px;
+    height: 200px;
+    margin-bottom: 20px;
+    border: 2px solid #ccc;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 18px;
+    color: #333;
+    background-size: cover;
+    background-position: center;
+}
+
+.gallery {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.gallery img {
+    width: 100px;
+    height: 60px;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: transform 0.3s;
+}
+
+.gallery img:hover {
+    transform: scale(1.1);
+}
+
+    </style>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -23,6 +71,31 @@
     <script src="script.js"></script>
 </body>
 <script type="text/javascript">
+    const imageContainer = document.getElementById("image");
+const thumbs = document.querySelectorAll(".thumb");
+
+function upDate(event) {
+    console.log("Mouse over image triggered");
+
+    const previewPic = event.target;
+    console.log("Alt Text: ", previewPic.alt);
+    console.log("Source: ", previewPic.src);
+
+    imageContainer.querySelector("p").textContent = previewPic.alt;
+    imageContainer.style.backgroundImage = `url(${previewPic.src})`;
+}
+
+function undo() {
+    console.log("Mouse leave image triggered");
+
+    imageContainer.querySelector("p").textContent = "Hover over an image below to display here.";
+    imageContainer.style.backgroundImage = "url('')";
+}
+
+thumbs.forEach(thumb => {
+    thumb.addEventListener("mouseover", upDate);
+    thumb.addEventListener("mouseleave", undo);
+});
 
 </script>
 </html>
